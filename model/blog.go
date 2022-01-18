@@ -2,21 +2,13 @@ package model
 
 import (
 	"time"
-	"github.com/neerajbg/golang-fiber-boilerplate/database"
 )
-
-var db = database.Connect()
 
 type Blog struct {
 	// gorm.Model
-	ID    uint   `gorm:"primaryKey"`
-	Title string `gorm:"column:title"`
-	Post  string `gorm:"column:post"`
-
+	ID    uint   `json:"id" gorm:"primaryKey"`
+	Title string `json:"title" gorm:"not null;column:title;size:256;"`
+	Post  string `json:"post" gorm:"column:post;type:text"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
-}
-
-func init(){
-	db.AutoMigrate(new(Blog))
 }

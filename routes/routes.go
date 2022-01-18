@@ -9,5 +9,6 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/", controller.HomePage)
 	// app.Get("/blog", controller.BlogListPage)
 	// app.Get("/blog/:id", controller.BlogPage)
+	app.Post("/blog", controller.CreateBlogPage)
 
 }

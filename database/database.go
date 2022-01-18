@@ -1,15 +1,16 @@
 package database
 
 import (
+	"log"
 	"os"
+	"github.com/neerajbg/golang-fiber-boilerplate/model"
 	"gorm.io/gorm"
 	"gorm.io/driver/mysql"
-	_ "github.com/joho/godotenv/autoload"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
-func Connect() *gorm.DB{
+func Connect(){
 
 	dsn := os.Getenv("dsn")
   	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -17,6 +18,10 @@ func Connect() *gorm.DB{
 
 	if err != nil {
 	  panic("Error in connection")
+	}else{
+		log.Println("Connection successful.")
 	}
-	return db
+
+	db.AutoMigrate(new(model.Blog))
+	DB = db
 }
